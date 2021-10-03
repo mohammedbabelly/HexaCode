@@ -1,0 +1,4 @@
+rootProject.name='TestLiveEdgeDetection'
+include ':app', ':liveedgedetection'
+include ':openCVLibrary340'
+
