@@ -13,12 +13,11 @@ import android.widget.ImageView;
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
 import com.adityaarora.liveedgedetection.constants.ScanConstants;
 import com.adityaarora.liveedgedetection.util.ScanUtils;
+import com.example.testliveedgedetection.hexacode.Code;
+import com.example.testliveedgedetection.hexacode.Functionality;
 
 import java.io.File;
 import java.io.IOException;
-
-import hexacode.Code;
-import hexacode.Functionality;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,12 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
                     Functionality functionality = new Functionality();
                     try {
-                        File file = new File(filePath);
-                        Code code = functionality.ConvertHXtoDC(file);
-                        Log.d("Code", code.toString());
-
-                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                        //bitmap.
+//                        File file = new File(filePath);
+                        Code code = functionality.ConvertHXtoDC(baseBitmap);
+                        Log.d("Code:", code.toString());
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
