@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GeneratedCode.GenerateCode">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/width"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="width" />
+
+            <EditText
+                android:id="@+id/height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="height" />
+        </LinearLayout>
+
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/hexa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:checked="true"
+                android:text="HEXA" />
+
+            <RadioButton
+                android:id="@+id/deicamal"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="HEXA" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/edge_color" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:id="@+id/textStatus"
+            android:text="Decimal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/standerdzation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="standerdzation"
+                android:lines="1"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/sector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="sector" />
+
+            <EditText
+                android:id="@+id/time_stamp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="Time" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="section"
+                android:lines="1"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="item"
+                android:lines="1"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/quality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="quality"
+                android:lines="1"
+                android:maxLength="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/unit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="unit"
+                android:lines="1"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/validty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="validty"
+                android:lines="1"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/entity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:hint="entity"
+                android:lines="1"
+                android:maxLength="1" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/edge_color" />
+        <Button
+            android:id="@+id/generate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Generate"/>
+
+
+    </LinearLayout>
+</ScrollView>

@@ -9,9 +9,14 @@ package com.example.testliveedgedetection.hexacode;
 //import java.awt.*;
 //import java.awt.geom.GeneralPath;
 //import java.awt.image.BufferedImage;
+
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.view.ViewGroup;
+
+import com.example.testliveedgedetection.GhCode;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,15 +24,20 @@ import java.util.List;
 import java.util.*;
 
 /**
- *
  * @author Besher Rehawee
  */
 public class Functionality {
-
+    ViewGroup viewGroup;
+    private Context context;
     private int width;
     private int height;
     private int xBase;
     private int yBase;
+
+    public Functionality(ViewGroup viewgroup,Context context) {
+        this.viewGroup = viewgroup;
+        this.context=context;
+    }
 
     public ConvertingDto ConvertDCtoHX(Integer dec, ArrayList<Integer> value, CodeCountDigite type) {
         ConvertingDto convertingDto = new ConvertingDto();
@@ -586,103 +596,37 @@ public class Functionality {
         return areas;
     }
 
-//    public final boolean DrawCode(List<Area> areas, String path) {
-//
-////C# TO JAVA CONVERTER TODO TASK: There is no preprocessor in Java:
-//        ///#region Inithialize
-//        int x = (width * 23) / 100;
-//        int y = (height * 17) / 100;
-//        int offsetCol = 50 * x / 100;
-//
-//        int offset_X_First_Side = (25 * x / 100);
-//        int offset_X_Second_Side = (25 * x / 100);
-//        int offset_Y_FirstVal = (30 * y / 100);
-//        int offset_Y_SecondVal = (80 * y / 100);
-//        int offset_Y_ThirdVal = (110 * y / 100);
-//        int offset_Y_ForthVal = (55 * y / 100);
-//
-//        int offset_X0_Row2 = x - (25 * x / 100);
-//        int offset_Y0_Row2 = y + (80 * y / 100);
-//        int offset_X0_Row3 = x;
-//        int offset_Y0_Row3 = offset_Y0_Row2 + (80 * y / 100);
-//        int offset_X0_Row4 = x + (25 * x / 100);
-//        int offset_Y0_Row4 = offset_Y0_Row3 + (80 * y / 100);
-//        int offset_X0_Row5 = x;
-//        int offset_Y0_Row5 = offset_Y0_Row4 + (80 * y / 100);
-//        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
-//
-//        Graphics2D ig2 = (Graphics2D) bi.createGraphics();
-//        ig2.setBackground(Color.WHITE);
-//
-//        double thickness = 10;
-//        ig2.setStroke(new BasicStroke((float) thickness));
-//        Stroke oldStroke = ig2.getStroke();
-//        ig2.clearRect(0, 0, width, height);
-//
-////        Graphics2D ig2 = bi.createGraphics();
-//        ig2.setPaint(Color.black);
-//
-//        ig2.drawRect(0, 0, 899, 599);
-//        ig2.setStroke(oldStroke);
-//        ig2.setBackground(Color.white);
-//
-////C# TO JAVA CONVERTER TODO TASK: There is no preprocessor in Java:
-//        ///#endregion
-////C# TO JAVA CONVERTER TODO TASK: There is no preprocessor in Java:
-//        ///#region Draw All Area
-//        for (int i = 0; i < 6; i++) {
-//            Point point1 = new Point(x, y);
-//            Point point2 = new Point(x + offset_X_First_Side, y + offset_Y_FirstVal);
-//            Point point3 = new Point(x + offset_X_First_Side, y + offset_Y_SecondVal);
-//            Point point4 = new Point(x, y + offset_Y_ThirdVal);
-//            Point point5 = new Point(x - offset_X_Second_Side, y + offset_Y_SecondVal);
-//            Point point6 = new Point(x - offset_X_Second_Side, y + offset_Y_FirstVal);
-//            Point[] curvePoints
-//                    = {
-//                        point1,
-//                        point2,
-//                        point3,
-//                        point4,
-//                        point5,
-//                        point6,
-//                        point1,};
-//
-//            for (int j = 0; j < areas.get(i).getSubAreas().size(); j++) {
-//                if (areas.get(i).getSubAreas().get(j).getColorStatus()) {
-//                    ArrayList<Integer> xp = new ArrayList<Integer>();
-//                    ArrayList<Integer> yp = new ArrayList<Integer>();
-//                    for (int k = 0; k < areas.get(i).getSubAreas().get(j).getPoints().length; k++) {
-//                        Point point = areas.get(i).getSubAreas().get(j).getPoints()[k];
-//                        xp.add(point.x);
-//                        yp.add(point.y);
-//
-//                    }
-//                    Integer[] sd = xp.toArray(new Integer[0]);
-//                    int[] p1 = new int[sd.length];
-//                    for (int k = 0; k < sd.length; k++) {
-//                        p1[k] = sd[k];
-//                    }
-//                    Integer[] qd = yp.toArray(new Integer[0]);
-//                    int[] p2 = new int[qd.length];
-//                    for (int k = 0; k < qd.length; k++) {
-//                        p2[k] = qd[k];
-//                    }
-//                    double pointsw[][] = {{p1[0], p2[0]}, {p1[1], p2[1]}, {p1[2], p2[2]}, {p1[0], p2[0]}};
-//
-//                    GeneralPath star = new GeneralPath();
-//                    star.moveTo(pointsw[0][0], pointsw[0][1]);
-//                    for (int k = 1; k < pointsw.length; k++) {
-//                        star.lineTo(pointsw[k][0], pointsw[k][1]);
-//                    }
-//
-//                    star.closePath();
-//                    ig2.fill(star);
-//
-//                }
-//            }
-//            x += offsetCol;
-//
-//        }
+    public final boolean DrawCode(List<Area> areas) {
+
+//C# TO JAVA CONVERTER TODO TASK: There is no preprocessor in Java:
+        ///#region Inithialize
+        kParams params = new kParams();
+        params.setX((width * 23) / 100);
+        params.setY((height * 17) / 100);
+
+        params.setOffsetCol(50 * params.getX() / 100);
+        params.setOffset_X_First_Side((25 * params.getX() / 100));
+        params.setOffset_X_Second_Side(25 * params.getX() / 100);
+        params.setOffset_Y_FirstVal((30 * params.getY() / 100));
+        params.setOffset_Y_SecondVal(80 * params.getY() / 100);
+        params.setOffset_Y_ThirdVal(110 * params.getY() / 100);
+        params.setOffset_Y_ForthVal(55 * params.getY() / 100);
+        params.setOffset_X0_Row2(params.getX() - (25 * params.getX() / 100));
+        params.setOffset_Y0_Row2(params.getY() + (80 * params.getY() / 100));
+        params.setOffset_X0_Row3(params.getX());
+        params.setOffset_Y0_Row3(params.getOffset_Y0_Row2() + (80 * params.getY() / 100));
+        params.setOffset_X0_Row4(params.getX() + (25 * params.getX() / 100));
+        params.setOffset_Y0_Row4(params.getOffset_Y0_Row3() + (80 * params.getY() / 100));
+        params.setOffset_X0_Row5(params.getX());
+        params.setOffset_Y0_Row5(params.getOffset_Y0_Row4() + (80 * params.getY() / 100));
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+
+        GhCode ghCode = new GhCode(context, bitmap,params,areas);
+        viewGroup.addView(ghCode);
+
+
+
 //        x = offset_X0_Row2;
 //        y = offset_Y0_Row2;
 //        for (int i = 0; i < 7; i++) {
@@ -916,8 +860,8 @@ public class Functionality {
 //            e.printStackTrace();
 //        }
 //
-//        return true;
-//    }
+        return true;
+    }
 
     private String HexaCodeTable(ArrayList<Integer> value) {
         String hex = "";
