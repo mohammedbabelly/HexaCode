@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_generate_code.xml" value="0.2962962962962963" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.304902962206333" />
         <entry key="app/src/main/res/layout/activity_result_generate.xml" value="0.3109375" />
+        <entry key="liveedgedetection/src/main/res/layout/activity_scan.xml" value="0.3109375" />
       </map>
     </option>
   </component>
@@ -37,7 +38,7 @@
       </profile-state>
     </entry>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

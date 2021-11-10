@@ -4,14 +4,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.Nullable;
+
 //import android.support.annotation.NonNull;
 import androidx.annotation.NonNull;
 //import androidx.annotation.A;
@@ -28,6 +27,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,15 +82,22 @@ public class ScanActivity extends AppCompatActivity implements IScanner, View.On
     private View cropRejectBtn;
     private Bitmap copyBitmap;
     private FrameLayout cropLayout;
+    private Button generateCodeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scan);
 //        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
         init();
+//         generateCodeButton = findViewById(R.id.generateCodeBtn);
+//         final Intent intent = new Intent(this, GenerateCode.class);
+//        generateCodeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) { startActivity(intent);}
+//        });
     }
+
 
     private void init() {
         containerScan = findViewById(R.id.container_scan);

@@ -5,8 +5,8 @@
 5    android:versionName="3.4.0" > <!-- <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="30" /> -->
 6    <uses-sdk
 7        android:minSdkVersion="16"
-7-->/home/abdalqader/StudioProjects/HexaCode/openCVLibrary340/src/main/AndroidManifest.xml
+7-->D:\Work\Mine\Najjar\HexaCode\openCVLibrary340\src\main\AndroidManifest.xml
 8        android:targetSdkVersion="30" />
-8-->/home/abdalqader/StudioProjects/HexaCode/openCVLibrary340/src/main/AndroidManifest.xml
+8-->D:\Work\Mine\Najjar\HexaCode\openCVLibrary340\src\main\AndroidManifest.xml
 9
 10</manifest>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.testliveedgedetection.R;
 
+
 public class Result_Generate extends AppCompatActivity {
 
     @Override

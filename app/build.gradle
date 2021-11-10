@@ -28,7 +28,7 @@ android {
 }
 configurations {
     cleanedAnnotations
-    implementation.exclude group: 'org.jetbrains' , module:'annotations'
+    implementation.exclude group: 'org.jetbrains', module: 'annotations'
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -37,6 +37,8 @@ dependencies {
     implementation project(':liveedgedetection')
     implementation project(path: ':openCVLibrary340')
     implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0'
+    implementation 'androidx.navigation:navigation-ui:2.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support:appcompat-v7:+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
