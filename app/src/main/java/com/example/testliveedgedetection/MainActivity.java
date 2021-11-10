@@ -37,77 +37,83 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 101;
     private ImageView scannedImageView;
     ViewGroup constrantId;
-    private EditText[] editTexts;
-    private EditText width;
-    private EditText height;
-    RadioGroup radioGroup;
-    Button generate;
+    Button generateButton;
     Button scanButton;
-    TextView generatedText;
 
-    private EditText ETstanderdzation;
+    EditText[] editTexts;
+    EditText width;
+    EditText height;
+    EditText decStandardization;
+    EditText decSector;
+    EditText decTimeStamp;
+    EditText decSection;
+    EditText decItem;
+    EditText decQuality;
+    EditText decUnit;
+    EditText decValidity;
+    EditText decEntity;
+    EditText hexStandardization;
+    EditText hexSector;
+    EditText hexTimeStamp;
+    EditText hexSection;
+    EditText hexItem;
+    EditText hexQuality;
+    EditText hexUnit;
+    EditText hexValidity;
+    EditText hexEntity;
 
-    private final String[] ids = {
-            "standerdzation",
-            "sector",
-            "time_stamp",
-            "section",
-            "item",
-            "quality",
-            "unit",
-            "validty",
-            "entity"
 
-    };
-
-    //    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
-//        return true;
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Generate Code");
         constrantId = findViewById(R.id.constrantId);
-        scannedImageView = (ImageView) findViewById(R.id.scanned_image);
+        scannedImageView = findViewById(R.id.scanned_image);
 
+        generateButton = findViewById(R.id.btnGenerate);
+        scanButton = findViewById(R.id.btnScan);
+        getAllById();
+
+        final Intent ResultGenerateIntent = new Intent(this, Result_Generate.class);
+        generateButton.setOnClickListener(view -> {
+            String[] a = new String[editTexts.length];
+            for (int i = 0; i < a.length; ++i) {
+                a[i] = editTexts[i].getText().toString();
+            }
+            boolean s = Validation(a);
+            if (s) {
+                startActivity(ResultGenerateIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+
+            } else {
+                makeToast("Make Sure Your Fields is Correct");
+            }
+
+        });
+        scanButton.setOnClickListener(view -> startScan());
+    }
+
+    private void getAllById() {
         width = findViewById(R.id.width);
         height = findViewById(R.id.height);
-        radioGroup = findViewById(R.id.radioGroup);
-        generate = findViewById(R.id.generate);
-        scanButton = findViewById(R.id.scan);
-        generatedText = (TextView) findViewById(R.id.generatedText);
-
-//        for (int i = 0; i < ids.length; ++i)
-//            editTexts[i] = findViewById(Integer.parseInt("R.id." + ids[i]));
-        final Intent ResultGenerateIntent = new Intent(this, Result_Generate.class);
-        generate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String[] a = new String[ids.length];
-                for (int i = 0; i < a.length; ++i) {
-                    a[i] = editTexts[i].getText().toString();
-                }
-                boolean s = Validation(a);
-                if (s) {
-                    startActivity(ResultGenerateIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
-
-                } else {
-                    makeToast("Make Sure Your Fields is Correct");
-                }
-
-            }
-        });
-        scanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startScan();
-            }
-        });
+        decStandardization = findViewById(R.id.decStandardization);
+        decSector = findViewById(R.id.decSector);
+        decTimeStamp = findViewById(R.id.decTime);
+        decSection = findViewById(R.id.decSection);
+        decItem = findViewById(R.id.decItem);
+        decQuality = findViewById(R.id.decQuality);
+        decUnit = findViewById(R.id.decUnit);
+        decValidity = findViewById(R.id.decValidty);
+        decEntity = findViewById(R.id.decEntity);
+        hexStandardization = findViewById(R.id.hexStandardization);
+        hexSector = findViewById(R.id.hexSector);
+        hexTimeStamp = findViewById(R.id.hexTime);
+        hexSection = findViewById(R.id.hexSection);
+        hexItem = findViewById(R.id.hexItem);
+        hexQuality = findViewById(R.id.hexQuality);
+        hexUnit = findViewById(R.id.hexUnit);
+        hexValidity = findViewById(R.id.hexValidty);
+        hexEntity = findViewById(R.id.hexEntity);
     }
 
     private void startScan() {
@@ -140,14 +146,13 @@ public class MainActivity extends AppCompatActivity {
                     ArrayList<Area> arrayList = functionality.ConvertCode(900, 600, std, item, quality, sector, section, unit, time, entity, validity);
                     functionality.DrawCode(arrayList);*/
 
-//                    scannedImageView.setVisibility(View.GONE);
 
                     File file = new File(filePath);
                     Code code = null;
                     try {
                         code = functionality.ConvertHXtoDC(baseBitmap);
                         makeToast("Done scanning: " + code.Item);
-                        generatedText.setText("The generated Text is: " + code.toString());
+                        setGeneratedValues(code);
                     } catch (IOException e) {
                         e.printStackTrace();
                         makeToast("Error");
@@ -158,6 +163,27 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
+    }
+
+    private void setGeneratedValues(Code code) {
+        decStandardization.setText(String.valueOf(code.Standardization));
+        decSector.setText(String.valueOf(code.Sector));
+        decTimeStamp.setText(String.valueOf(code.TimeStump));
+        decSection.setText(String.valueOf(code.Section));
+        decItem.setText(String.valueOf(code.Item));
+        decQuality.setText(String.valueOf(code.Quality));
+        decUnit.setText(String.valueOf(code.Unit));
+        decValidity.setText(String.valueOf(code.Validty));
+        decEntity.setText(String.valueOf(code.Entity));
+        hexStandardization.setText(String.valueOf(code.StandardizationHX));
+        hexSector.setText(String.valueOf(code.SectorHX));
+        hexTimeStamp.setText(String.valueOf(code.TimeStumpHX));
+        hexSection.setText(String.valueOf(code.SectionHX));
+        hexItem.setText(String.valueOf(code.ItemHX));
+        hexQuality.setText(String.valueOf(code.QualityHX));
+        hexUnit.setText(String.valueOf(code.UnitHX));
+        hexValidity.setText(String.valueOf(code.ValidtyHX));
+        hexEntity.setText(String.valueOf(code.EntityHX));
     }
 
     private void makeToast(String message) {
