@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.adityaarora.liveedgedetection.activity.ScanActivity">
     <Button
-        android:id="@+id/generateCodeBtn"
+        android:id="@+id/generateCodeBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="invisible"

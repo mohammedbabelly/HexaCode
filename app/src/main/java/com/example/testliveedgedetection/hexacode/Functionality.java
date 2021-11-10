@@ -15,6 +15,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.testliveedgedetection.GhCode;
 
@@ -28,15 +30,17 @@ import java.util.*;
  */
 public class Functionality {
     ViewGroup viewGroup;
+    TextView newTextView;
     private Context context;
     private int width;
     private int height;
     private int xBase;
     private int yBase;
 
-    public Functionality(ViewGroup viewgroup,Context context) {
+    public Functionality(ViewGroup viewgroup, Context context, TextView newTextView) {
         this.viewGroup = viewgroup;
-        this.context=context;
+        this.context = context;
+        this.newTextView = newTextView;
     }
 
     public ConvertingDto ConvertDCtoHX(Integer dec, ArrayList<Integer> value, CodeCountDigite type) {
@@ -622,10 +626,11 @@ public class Functionality {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
 
 
-        GhCode ghCode = new GhCode(context, bitmap,params,areas);
+        GhCode ghCode = new GhCode(context, bitmap, params, areas);
+
+//        newTextView.setText("New Text added");
+//        viewGroup.addView(newTextView);
         viewGroup.addView(ghCode);
-
-
 
 //        x = offset_X0_Row2;
 //        y = offset_Y0_Row2;

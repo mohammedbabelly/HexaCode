@@ -1,32 +1,29 @@
 package com.example.testliveedgedetection;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
 import com.adityaarora.liveedgedetection.constants.ScanConstants;
 import com.adityaarora.liveedgedetection.util.ScanUtils;
-import com.adityaarora.liveedgedetection.view.TouchImageView;
 import com.example.testliveedgedetection.GeneratedCode.Result_Generate;
 import com.example.testliveedgedetection.hexacode.Area;
 import com.example.testliveedgedetection.hexacode.Code;
 import com.example.testliveedgedetection.hexacode.CodeCountDigite;
 import com.example.testliveedgedetection.hexacode.Functionality;
+import com.example.testliveedgedetection.hexacode.Range;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,11 +33,12 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 101;
     private ImageView scannedImageView;
-    ViewGroup constrantId;
+    LinearLayout parentLinear;
     Button generateButton;
     Button scanButton;
 
-    EditText[] editTexts;
+    ArrayList<EditText> editTexts = new ArrayList<>();
+    ArrayList<Range> ranges = new ArrayList<>();
     EditText width;
     EditText height;
     EditText decStandardization;
@@ -68,29 +66,59 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("Generate Code");
-        constrantId = findViewById(R.id.constrantId);
         scannedImageView = findViewById(R.id.scanned_image);
-
+        parentLinear = findViewById(R.id.parentLinear);
         generateButton = findViewById(R.id.btnGenerate);
         scanButton = findViewById(R.id.btnScan);
         getAllById();
 
-        final Intent ResultGenerateIntent = new Intent(this, Result_Generate.class);
         generateButton.setOnClickListener(view -> {
-            String[] a = new String[editTexts.length];
-            for (int i = 0; i < a.length; ++i) {
-                a[i] = editTexts[i].getText().toString();
+            setValidationRanges();
+            boolean validated = true;
+            for (int i = 0; i < editTexts.size(); ++i) {
+                int value = 0;
+                try {
+                    value = Integer.valueOf(editTexts.get(i).getText().toString());
+                } catch (NumberFormatException e) {
+                }
+                if (!(value >= ranges.get(i).start && value <= ranges.get(i).end)) {
+                    validated = false;
+                    editTexts.get(i).setError(ranges.get(i).start + " ~ " + ranges.get(i).end);
+//                    break;
+                }
             }
-            boolean s = Validation(a);
-            if (s) {
-                startActivity(ResultGenerateIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP));
+            if (validated) {
+                Functionality functionality = new Functionality(parentLinear, this, new TextView(this));
+                String std = functionality.ConvertDCtoHX(Integer.valueOf(decStandardization.getText().toString()), new ArrayList<>(), CodeCountDigite.Standardization).getHXValue();
+                String sector = functionality.ConvertDCtoHX(Integer.valueOf(decSector.getText().toString()), new ArrayList<>(), CodeCountDigite.Sector).getHXValue();
+                String entity = functionality.ConvertDCtoHX(Integer.valueOf(decEntity.getText().toString()), new ArrayList<>(), CodeCountDigite.Entity).getHXValue();
+                String time = functionality.ConvertDCtoHX(Integer.valueOf(decTimeStamp.getText().toString()), new ArrayList<>(), CodeCountDigite.TimeStump).getHXValue();
+                String section = functionality.ConvertDCtoHX(Integer.valueOf(decSection.getText().toString()), new ArrayList<>(), CodeCountDigite.Section).getHXValue();
+                String item = functionality.ConvertDCtoHX(Integer.valueOf(decItem.getText().toString()), new ArrayList<>(), CodeCountDigite.Item).getHXValue();
+                String quality = functionality.ConvertDCtoHX(Integer.valueOf(decQuality.getText().toString()), new ArrayList<>(), CodeCountDigite.Quality).getHXValue();
+                String unit = functionality.ConvertDCtoHX(Integer.valueOf(decUnit.getText().toString()), new ArrayList<>(), CodeCountDigite.Unit).getHXValue();
+                String validity = functionality.ConvertDCtoHX(Integer.valueOf(decValidity.getText().toString()), new ArrayList<>(), CodeCountDigite.Validty).getHXValue();
+//                ArrayList<Area> arrayList = functionality.ConvertCode(Integer.valueOf(width.getText().toString()), Integer.valueOf(height.getText().toString()), std, item, quality, sector, section, unit, time, entity, validity);
+//                functionality.DrawCode(arrayList);
+                Intent resultGenerateIntent = new Intent(this, Result_Generate.class);
+                resultGenerateIntent.putExtra("std", std);
+                resultGenerateIntent.putExtra("sector", sector);
+                resultGenerateIntent.putExtra("entity", entity);
+                resultGenerateIntent.putExtra("time", time);
+                resultGenerateIntent.putExtra("section", section);
+                resultGenerateIntent.putExtra("item", item);
+                resultGenerateIntent.putExtra("quality", quality);
+                resultGenerateIntent.putExtra("unit", unit);
+                resultGenerateIntent.putExtra("validity", validity);
 
+                startActivity(resultGenerateIntent);
             } else {
-                makeToast("Make Sure Your Fields is Correct");
+                makeToast("One or more validations failed");
             }
-
         });
-        scanButton.setOnClickListener(view -> startScan());
+        scanButton.setOnClickListener(view ->
+                startScan()
+        );
     }
 
     private void getAllById() {
@@ -114,6 +142,28 @@ public class MainActivity extends AppCompatActivity {
         hexUnit = findViewById(R.id.hexUnit);
         hexValidity = findViewById(R.id.hexValidty);
         hexEntity = findViewById(R.id.hexEntity);
+        editTexts.clear();
+        editTexts.add(width);
+        editTexts.add(height);
+        editTexts.add(decStandardization);
+        editTexts.add(decSector);
+        editTexts.add(decTimeStamp);
+        editTexts.add(decSection);
+        editTexts.add(decItem);
+        editTexts.add(decQuality);
+        editTexts.add(decUnit);
+        editTexts.add(decValidity);
+        editTexts.add(decEntity);
+        editTexts.add(hexStandardization);
+        editTexts.add(hexSector);
+        editTexts.add(hexTimeStamp);
+        editTexts.add(hexSection);
+        editTexts.add(hexItem);
+        editTexts.add(hexQuality);
+        editTexts.add(hexUnit);
+        editTexts.add(hexValidity);
+        editTexts.add(hexEntity);
+
     }
 
     private void startScan() {
@@ -133,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     scannedImageView.setImageBitmap(baseBitmap);
 
 
-                    Functionality functionality = new Functionality(constrantId, this);
+                    Functionality functionality = new Functionality(parentLinear, this, new TextView(this));
                     /*String std = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Standardization).getHXValue();
                     String sector = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Sector).getHXValue();
                     String entity = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Entity).getHXValue();
@@ -191,10 +241,47 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    boolean Validation(String[] s) {
-        for (int i = 0; i < s.length; ++i) {
-            if (s[i].isEmpty()) return false;
-        }
-        return true;
+    private void setValidationRanges() {
+        ranges.clear();
+        //width;
+        ranges.add(new Range(300, 1920));
+        //height;
+        ranges.add(new Range(300, 1920));
+        // decStandardization;
+        ranges.add(new Range(0, 262143));
+        // decSector;
+        ranges.add(new Range(0, 262143));
+        // decTimeStamp;
+        ranges.add(new Range(0, 687194761/*735*/));
+        // decSection;
+        ranges.add(new Range(0, 4095));
+        // decItem;
+        ranges.add(new Range(0, 262143));
+        // decQuality;
+        ranges.add(new Range(0, 63));
+        // decUnit;
+        ranges.add(new Range(0, 4095));
+        // decValidity;
+        ranges.add(new Range(0, 262143));
+        // decEntity;
+        ranges.add(new Range(0, 1073741823));
+        // hexStandardization;
+        ranges.add(new Range(0, 262143));
+        // hexSector;
+        ranges.add(new Range(0, 262143));
+        // hexTimeStamp;
+        ranges.add(new Range(0, 687194761/*735*/));
+        // hexSection;
+        ranges.add(new Range(0, 4095));
+        // hexItem;
+        ranges.add(new Range(0, 262143));
+        // hexQuality;
+        ranges.add(new Range(0, 63));
+        // hexUnit;
+        ranges.add(new Range(0, 4095));
+        // hexValidity;
+        ranges.add(new Range(0, 262143));
+        // hexEntity;
+        ranges.add(new Range(0, 1073741823));
     }
 }
