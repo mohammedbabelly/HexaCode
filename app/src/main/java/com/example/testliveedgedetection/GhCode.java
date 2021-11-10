@@ -69,12 +69,12 @@ public class GhCode extends View {
             pointList.add(point5);
             pointList.add(point6);
             pointList.add(point1);
-            Path polygonPath = new Path();
-            polygonPath.moveTo(point1.x, point1.y);
-            for (int j = 1; j < 7; ++j)
-                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
-
-            canvas.drawPath(polygonPath, mPaint);
+//            Path polygonPath = new Path();
+//            polygonPath.moveTo(point1.x, point1.y);
+//            for (int j = 1; j < 7; ++j)
+//                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
+//
+//            canvas.drawPath(polygonPath, mPaint);
 
 
             for (int j = 0; j < areas.get(i).getSubAreas().size(); j++) {
@@ -115,11 +115,11 @@ public class GhCode extends View {
             pointList.add(point6);
             pointList.add(point1);
             Path polygonPath = new Path();
-            polygonPath.moveTo(point1.x, point1.y);
-            for (int j = 1; j < 7; ++j)
-                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
-
-            canvas.drawPath(polygonPath, mPaint);
+//            polygonPath.moveTo(point1.x, point1.y);
+//            for (int j = 1; j < 7; ++j)
+//                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
+//
+//            canvas.drawPath(polygonPath, mPaint);
 
 
             for (int j = 0; j < areas.get(i + 6).getSubAreas().size(); j++) {
@@ -159,12 +159,12 @@ public class GhCode extends View {
             pointList.add(point5);
             pointList.add(point6);
             pointList.add(point1);
-            Path polygonPath = new Path();
-            polygonPath.moveTo(point1.x, point1.y);
-            for (int j = 1; j < 7; ++j)
-                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
-
-            canvas.drawPath(polygonPath, mPaint);
+//            Path polygonPath = new Path();
+//            polygonPath.moveTo(point1.x, point1.y);
+//            for (int j = 1; j < 7; ++j)
+//                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
+//
+//            canvas.drawPath(polygonPath, mPaint);
 
 
             for (int j = 0; j < areas.get(i + 13).getSubAreas().size(); j++) {
@@ -204,12 +204,12 @@ public class GhCode extends View {
             pointList.add(point5);
             pointList.add(point6);
             pointList.add(point1);
-            Path polygonPath = new Path();
-            polygonPath.moveTo(point1.x, point1.y);
-            for (int j = 1; j < 7; ++j)
-                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
-
-            canvas.drawPath(polygonPath, mPaint);
+//            Path polygonPath = new Path();
+//            polygonPath.moveTo(point1.x, point1.y);
+//            for (int j = 1; j < 7; ++j)
+//                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
+//
+//            canvas.drawPath(polygonPath, mPaint);
 
 
             for (int j = 0; j < areas.get(i + 19).getSubAreas().size(); j++) {
@@ -250,12 +250,12 @@ public class GhCode extends View {
             pointList.add(point5);
             pointList.add(point6);
             pointList.add(point1);
-            Path polygonPath = new Path();
-            polygonPath.moveTo(point1.x, point1.y);
-            for (int j = 1; j < 7; ++j)
-                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
-
-            canvas.drawPath(polygonPath, mPaint);
+//            Path polygonPath = new Path();
+//            polygonPath.moveTo(point1.x, point1.y);
+//            for (int j = 1; j < 7; ++j)
+//                polygonPath.lineTo(pointList.get(j).x, pointList.get(j).y);
+//
+//            canvas.drawPath(polygonPath, mPaint);
 
 
             for (int j = 0; j < areas.get(i + 25).getSubAreas().size(); j++) {

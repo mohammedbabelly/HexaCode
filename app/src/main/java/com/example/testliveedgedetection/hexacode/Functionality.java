@@ -623,7 +623,7 @@ public class Functionality {
         params.setOffset_Y0_Row4(params.getOffset_Y0_Row3() + (80 * params.getY() / 100));
         params.setOffset_X0_Row5(params.getX());
         params.setOffset_Y0_Row5(params.getOffset_Y0_Row4() + (80 * params.getY() / 100));
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(width, width, Bitmap.Config.ARGB_8888);
 
 
         GhCode ghCode = new GhCode(context, bitmap, params, areas);
