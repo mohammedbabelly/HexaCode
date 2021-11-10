@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.testliveedgedetection.R;
 import com.example.testliveedgedetection.hexacode.Area;
 import com.example.testliveedgedetection.hexacode.Functionality;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 

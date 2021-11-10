@@ -6,25 +6,20 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
 import com.adityaarora.liveedgedetection.constants.ScanConstants;
 import com.adityaarora.liveedgedetection.util.ScanUtils;
 import com.example.testliveedgedetection.GeneratedCode.Result_Generate;
-import com.example.testliveedgedetection.hexacode.Area;
 import com.example.testliveedgedetection.hexacode.Code;
 import com.example.testliveedgedetection.hexacode.CodeCountDigite;
 import com.example.testliveedgedetection.hexacode.Functionality;
 import com.example.testliveedgedetection.hexacode.Range;
-import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,8 +93,6 @@ public class MainActivity extends AppCompatActivity {
                 String quality = functionality.ConvertDCtoHX(Integer.valueOf(decQuality.getText().toString()), new ArrayList<>(), CodeCountDigite.Quality).getHXValue();
                 String unit = functionality.ConvertDCtoHX(Integer.valueOf(decUnit.getText().toString()), new ArrayList<>(), CodeCountDigite.Unit).getHXValue();
                 String validity = functionality.ConvertDCtoHX(Integer.valueOf(decValidity.getText().toString()), new ArrayList<>(), CodeCountDigite.Validty).getHXValue();
-//                ArrayList<Area> arrayList = functionality.ConvertCode(Integer.valueOf(width.getText().toString()), Integer.valueOf(height.getText().toString()), std, item, quality, sector, section, unit, time, entity, validity);
-//                functionality.DrawCode(arrayList);
                 Intent resultGenerateIntent = new Intent(this, Result_Generate.class);
                 resultGenerateIntent.putExtra("std", std);
                 resultGenerateIntent.putExtra("sector", sector);
@@ -181,22 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     Bitmap baseBitmap = ScanUtils.decodeBitmapFromFile(filePath, ScanConstants.IMAGE_NAME);
                     scannedImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     scannedImageView.setImageBitmap(baseBitmap);
-
-
                     Functionality functionality = new Functionality(parentLinear, this, new TextView(this));
-                    /*String std = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Standardization).getHXValue();
-                    String sector = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Sector).getHXValue();
-                    String entity = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Entity).getHXValue();
-                    String time = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.TimeStump).getHXValue();
-                    String section = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Section).getHXValue();
-                    String item = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Item).getHXValue();
-                    String quality = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Quality).getHXValue();
-                    String unit = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Unit).getHXValue();
-                    String validity = functionality.ConvertDCtoHX(10, new ArrayList<>(), CodeCountDigite.Validty).getHXValue();
-                    ArrayList<Area> arrayList = functionality.ConvertCode(900, 600, std, item, quality, sector, section, unit, time, entity, validity);
-                    functionality.DrawCode(arrayList);*/
-
-
                     File file = new File(filePath);
                     Code code = null;
                     try {
